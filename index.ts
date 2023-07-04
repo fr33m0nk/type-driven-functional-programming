@@ -22,5 +22,5 @@ console.log(curriedSum(10)(-5))
 /*
 04. Recursive sum with accumulator
 */
-
-console.log(sumAll([1, 2, 3,4 ,5, 10]))
+console.log(sumAll([])) // => 0
+console.log(sumAll([1, 2, 3,4 ,5, 10])) // => 25
