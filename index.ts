@@ -64,8 +64,15 @@ console.log('06. Uses Either for returned values ', divideTwoIfEven(0))
 console.log('06. Uses Either for returned values ', divideTwoIfEven(11))
 console.log('06. Uses Either for returned values ', divideTwoIfEven(10))
 
+type ApplyFnToEither = <E, A, B>(
+    f: (y: A) => B
+) => (x: Either<E, A>) => Either<E, B>
+const applyFnToEither: ApplyFnToEither = f =>
+ x =>
+  isLeft(x) ? x : compose(right,f)(x.right)
+
 const composedEither = compose(
-    (x: Either<string, number>) => isLeft(x) ? x : right(increment(x.right))
+    applyFnToEither(increment)
     ,divideTwoIfEven
 );
 
