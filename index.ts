@@ -33,6 +33,7 @@ const composedOption = compose(
     (x: Option<number>) => isNone(x) ? x : some(increment(x.value))
     ,divideTwoOption)
 
+console.log('05-1:Option: ', composedOption(0));
 console.log('05-1:Option: ', composedOption(10));
 
 /*
@@ -46,4 +47,5 @@ const composedMaybe: ComposedMaybe = compose(
     ,divideTwoMaybe
 )
 
+console.log('05-2:Maybe: ', composedMaybe(0));
 console.log('05-2:Maybe: ', composedMaybe(10));
