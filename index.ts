@@ -2,7 +2,7 @@ import {increment, toString, isEven, sum} from './01_functions'
 import {compose} from './02_function_composition'
 import {curry} from './03_function_currying'
 import {sumAll} from './04_function_recursion'
-import {Option, Maybe, some, none, isNone, just, nothing, isNothing} from './05_option_and_maybe'
+import {Option, Maybe, some, none, isNone, just, nothing, isNothing, Nothing} from './05_option_and_maybe'
 import {Either, left, right, isLeft} from './06_either'
 
 /*
@@ -30,8 +30,14 @@ console.log('04. Recursive sum with accumulator ', sumAll([1, 2, 3,4 ,5, 10])) /
 */
 type DivideTwoOption = (x: number) => Option<number>
 const divideTwoOption: DivideTwoOption = (x) => x === 0 ? none : some(2/x)
+
+type ApplyFnToOption = <A, B>(
+    mapFn: (y: A) => B
+) => (x: Option<A>) => Option<B>
+const applyFnToOption: ApplyFnToOption = mapFn => x => isNone(x) ? x : compose(some,mapFn)(x.value)
+
 const composedOption = compose(
-    (x: Option<number>) => isNone(x) ? x : some(increment(x.value))
+    applyFnToOption(increment)
     ,divideTwoOption)
 
 console.log('05-1:Option: ', composedOption(0));
@@ -42,9 +48,15 @@ console.log('05-1:Option: ', composedOption(10));
 */
 type DivideTwoMaybe = (x: number) => Maybe<number>
 const divideTwoMaybe: DivideTwoMaybe = (x) => x === 0 ? nothing : just (2/x)
+
+type ApplyFnToMaybe = <A, B>(
+    mapFn: (y: A) => B
+) => (x: Maybe<A>) => Maybe<B>
+const applyFnToMaybe: ApplyFnToMaybe = mapFn => x => isNothing(x) ? x : compose(just,mapFn)(x.value)
+
 type ComposedMaybe = (x: number) => Maybe<number>
 const composedMaybe: ComposedMaybe = compose(
-    (x: Maybe<number>) => isNothing(x) ? x : just(increment(x.value))
+    applyFnToMaybe(increment)
     ,divideTwoMaybe
 )
 
