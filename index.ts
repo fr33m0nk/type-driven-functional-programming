@@ -2,7 +2,7 @@ import {increment, toString, isEven, sum} from './01_functions'
 import {compose} from './02_function_composition'
 import {curry} from './03_function_currying'
 import {sumAll} from './04_function_recursion'
-import {Option, Maybe, some, none, isNone, just, nothing, isNothing, Nothing} from './05_option_and_maybe'
+import {Option, Maybe, some, none, isNone, just, nothing, isNothing} from './05_option_and_maybe'
 import {Either, left, right, isLeft} from './06_either'
 
 /*
