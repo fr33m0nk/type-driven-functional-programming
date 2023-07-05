@@ -3,6 +3,7 @@ import {compose} from './02_function_composition'
 import {curry} from './03_function_currying'
 import {sumAll} from './04_function_recursion'
 import {Option, Maybe, some, none, isNone, just, nothing, isNothing} from './05_option_and_maybe'
+import {Either, left, right, isLeft} from './06_either'
 
 /*
 02. Function composition
@@ -49,3 +50,25 @@ const composedMaybe: ComposedMaybe = compose(
 
 console.log('05-2:Maybe: ', composedMaybe(0));
 console.log('05-2:Maybe: ', composedMaybe(10));
+
+/*
+06. Uses Either for returned values
+*/
+
+type DivideTwoIfEven = (n: number) => Either<string, number>
+const divideTwoIfEven: DivideTwoIfEven = (n: number) => n === 0 ?
+ left('cannot divide by zero') : n % 2 !== 0 ?
+  left('n is not even') : right(2/n)
+
+console.log('06. Uses Either for returned values ', divideTwoIfEven(0))
+console.log('06. Uses Either for returned values ', divideTwoIfEven(11))
+console.log('06. Uses Either for returned values ', divideTwoIfEven(10))
+
+const composedEither = compose(
+    (x: Either<string, number>) => isLeft(x) ? x : right(increment(x.right))
+    ,divideTwoIfEven
+);
+
+console.log('06. Uses Either for returned values with composition ', composedEither(0))
+console.log('06. Uses Either for returned values with composition ', composedEither(11))
+console.log('06. Uses Either for returned values with composition ', composedEither(10))
