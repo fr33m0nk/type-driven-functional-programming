@@ -1,12 +1,15 @@
-# functional-typescript
+# Typedriven Functional Programming in Typescript
 
-To install dependencies:
+## Follow along code for brilliant Functional programming [playlist](https://www.youtube.com/playlist?list=PLuPevXgCPUIMbCxBEnc1dNwboH6e2ImQo) by [Web Village Voyage](https://www.youtube.com/@webvv)
+
+
+### To install dependencies:
 
 ```bash
 bun install
 ```
 
-To run:
+### To run:
 
 ```bash
 bun run index.ts
