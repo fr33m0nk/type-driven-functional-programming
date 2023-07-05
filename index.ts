@@ -5,6 +5,7 @@ import {sumAll} from './04_function_recursion'
 import {Option, Maybe, some, none, isNone, just, nothing, isNothing} from './05_option_and_maybe'
 import {Either, left, right, isLeft} from './06_either'
 import {List, isNil, cons, nil, showList} from './07_linked_list'
+import {matchOptionWidened, matchEitherWidened, matchListWidened} from './08_algebraic_data_types'
 /*
 02. Function composition
 */
@@ -99,3 +100,51 @@ const emptyList = nil
 console.log('07. My List is ', showList(emptyList))
 const myList: List<number> = cons(1, cons(2, cons(3, nil)))
 console.log('07. My List is ', showList(myList))
+
+/*
+08-1. Patter matching on Option
+*/
+const optionResult = (maybeNum: Option<number>) => matchOptionWidened(
+    () => 'Value does not exist',
+    (a: number) => `value is ${a}`
+)(maybeNum)
+const mayBeNum1 = some(12)
+console.log('08-1. Patter matching on Option ', optionResult(mayBeNum1))
+const mayBeNum2 = none
+console.log('08-1. Patter matching on Option ', optionResult(mayBeNum2))
+
+/*
+08-2. Patter matching on Either
+*/
+const eitherResult = (eitherNum: Either<string, number>) => matchEitherWidened(
+    (e: string) => `ErrValue: ${e}`,
+    (a: number) => `value is: ${a}`
+)(eitherNum)
+const eitherNumOrError1 = left('Error Error Error')
+console.log('08-2. Patter matching on Either ', eitherResult(eitherNumOrError1))
+const eitherNumOrError2 = right(10)
+console.log('08-2. Patter matching on Either ', eitherResult(eitherNumOrError2))
+
+/*
+08-3. Patter matching on List
+*/
+const listResult = (xs: List<number>) => matchListWidened(
+    () => 'List is empty'
+    , (head: number, tail: List<number>) => `head is ${head}`
+)(xs)
+const myListEmpty = nil
+console.log('08-3. Patter matching on List ', listResult(myListEmpty))
+const myListv2 = cons(1, cons(2, cons(3, nil)))
+console.log('08-3. Patter matching on List ', listResult(myListv2))
+
+/*
+08-4. Patter matching on List using `ts-patten` npm lib
+*/
+import {match} from 'ts-pattern'
+
+const listResultv2 = (xs: List<number>) => match(xs)
+                                            .with({_tag: 'Nil'}, () => 'List is empty')
+                                            .with({_tag: 'Cons'}, ({head, tail}) => `head is ${head}`)
+                                            .exhaustive()
+console.log('08-4. Patter matching on List using `ts-patten` npm lib ', listResultv2(myListEmpty))                                            
+console.log('08-4. Patter matching on List using `ts-patten` npm lib ', listResultv2(myListv2))
