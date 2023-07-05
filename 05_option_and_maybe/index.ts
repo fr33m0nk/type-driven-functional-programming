@@ -23,7 +23,7 @@ export const some = <A>(a: A): Option<A> => ({
     value: a
 })
 
-export const none: None = {
+export const none: Option<never> = {
     _tag: 'None'
 }
 
