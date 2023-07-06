@@ -192,3 +192,47 @@ console.log('09-1. Monoid (concatAll) using multiplyMonoid ',
 console.log('09-1. Monoid (concatAll) using appendMonoid ',
     concatAllMonoid(appendMonoid)(cons('Hello', cons('  ', cons('World!', nil))))
 )
+
+/*
+10-1. Groups (wallet balance)
+*/
+import {Group} from './10_group';
+
+const addGroup: Group<number> = {
+    concat: (x, y) => x + y,
+    empty: 0,
+    inverse: x => -1 * x
+}
+
+const walletBalance = addGroup.concat(
+    addGroup.empty,
+    addGroup.concat(80,
+        addGroup.concat(20,
+            addGroup.inverse(10)))
+)
+
+console.log('10-1. Groups (wallet balance) ', walletBalance)
+
+/*
+10-2. Groups (Caesar cipher)
+*/
+const alphabets = 'abcdefghijklmnopqrstuvwxyz';
+
+const caesarGroup: Group<number> = {
+    concat: (existingKey, shiftKey) => (existingKey + shiftKey) % alphabets.length,
+    empty: 0,
+    inverse: (unshiftKey) => (alphabets.length - unshiftKey) % alphabets.length
+}
+
+type Encrypt = (plainText: string, shiftKey: number) => string
+const encrypt: Encrypt = (plainText, shiftKey) => plainText.split('').map(c => {
+    const currentKey = alphabets.indexOf(c);
+    return (currentKey === -1) ? c : alphabets[caesarGroup.concat(currentKey, shiftKey)]
+}).join('');
+
+type Decrypt = (cipherText: string, key: number) => string
+const decrypt: Decrypt = (cipherText, unshiftKey) => encrypt(cipherText, caesarGroup.inverse(unshiftKey))
+
+console.log('10-2. Groups (Caesar cipher) : Encrypt `hello world!` : ', encrypt('Hello world!', 7))
+
+console.log('10-2. Groups (Caesar cipher) : Decrypt `hello world!` : ', decrypt(encrypt('Hello world!', 7), 7))
