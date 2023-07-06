@@ -5,6 +5,10 @@ interface Magma<A> {
     concat: (x: A, y:A) => A
 }
 
+/*
+Typescript has no way of exercising associativity validation via Types
+Thus, tests are to relied on e.g. assert(f(g(x)) === g(f(x)))
+*/
 interface Semigroup<A> extends Magma<A> { }
 
 export const addSemigroup: Semigroup<number> = { concat: (x, y) => x + y }
