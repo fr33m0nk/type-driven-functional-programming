@@ -21,7 +21,7 @@ export const concatAllSemigroup =  <A>(s: Semigroup<A>) => (startWith: A) => (xs
 )(xs)
 
 
-interface Monoid<A> extends Semigroup<A> {
+export interface Monoid<A> extends Semigroup<A> {
     empty: A
 }
 
