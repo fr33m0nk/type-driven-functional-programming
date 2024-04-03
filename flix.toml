@@ -1,0 +1,6 @@
+[package]
+name        = "functional-programming-flix"
+description = "test"
+version     = "0.1.0"
+flix        = "0.45.0"
+authors     = ["Prashant Sinha"]
