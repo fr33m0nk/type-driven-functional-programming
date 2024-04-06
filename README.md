@@ -1,6 +1,6 @@
 # Typedriven Functional Programming in
-    - [Typescript](https://github.com/fr33m0nk/functional-programming-typescript/tree/typescript)
-    - [Flix lang](https://github.com/fr33m0nk/functional-programming-typescript/tree/flix-lang)
+- [Typescript](https://github.com/fr33m0nk/functional-programming-typescript/tree/typescript)
+- [Flix lang](https://github.com/fr33m0nk/functional-programming-typescript/tree/flix-lang)
 
 ## The language implementations are in their own branches (linked above)
 
