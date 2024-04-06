@@ -16,8 +16,7 @@ jobs:
             distribution: 'temurin'
             java-version: '22'
         - name: Setup Flix
-          uses: wei/wget@v1
-          with:
-            args: -qO- https://objects.githubusercontent.com/github-production-release-asset-2e65be/37299718/c07fa437-db6b-459c-83bf-18c338b9e643?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240406%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240406T132353Z&X-Amz-Expires=300&X-Amz-Signature=17ceca3a25073844c3fcb0af758056afb9ea4571c25cb6039eb8a5d3c507af1f&X-Amz-SignedHeaders=host&actor_id=43627165&key_id=0&repo_id=37299718&response-content-disposition=attachment%3B%20filename%3Dflix.jar&response-content-type=application%2Foctet-stream
+          run: |
+            wget -O flix.jar https://objects.githubusercontent.com/github-production-release-asset-2e65be/37299718/c07fa437-db6b-459c-83bf-18c338b9e643?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240406%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240406T132353Z&X-Amz-Expires=300&X-Amz-Signature=17ceca3a25073844c3fcb0af758056afb9ea4571c25cb6039eb8a5d3c507af1f&X-Amz-SignedHeaders=host&actor_id=43627165&key_id=0&repo_id=37299718&response-content-disposition=attachment%3B%20filename%3Dflix.jar&response-content-type=application%2Foctet-stream
         - name: run tests & build jar
           run: java -jar flix.jar test    
