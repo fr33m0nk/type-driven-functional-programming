@@ -28,5 +28,17 @@ mod Semigroup {
 }
 
 mod Monoid {
+    use Semigroup.Semigroup
 
+    trait MyMonoid[a] {
+        pub def empty(): a
+
+        pub def identity(x: a): a
+    }
+
+    instance MyMonoid[Int32] {
+        pub def empty(): Int32 = 0
+
+        pub def identity(x: Int32): Int32 = x
+    }
 }

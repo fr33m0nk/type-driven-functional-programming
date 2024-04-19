@@ -1,5 +1,6 @@
 use Magma.Magma
 use Semigroup.Semigroup
+use Monoid.MyMonoid
 
 ///
 /// A Magma is a category which has a concat operation that takes 2 values of the category and 
@@ -19,3 +20,14 @@ def isNumSubstractionMagma() : Bool =
 @Test
 def isNumAdditionSemigroup() : Bool =
     Semigroup.concat(10, Semigroup.concat(30, 20)) == Semigroup.concat(20, Semigroup.concat(30, 10)) and Semigroup.concat(30, Semigroup.concat(20, 10)) == 60
+
+///
+/// A Monoid is a Semigroup with empty member and identity function
+/// 
+@Test
+def isNumAdditionAMonoidWithEmpty() : Bool =
+    MyMonoid.empty() == 0
+
+@Test
+def isNumAdditionAMonoidWithIdentity() : Bool =
+    MyMonoid.identity(10) == 10
