@@ -17,6 +17,6 @@ jobs:
             java-version: '22'
         - name: Setup Flix
           run: |
-            wget -O flix.jar https://github.com/flix/flix/releases/download/v0.45.0/flix.jar
+            wget -O flix.jar https://github.com/flix/flix/releases/download/v0.46.0/flix.jar
         - name: run tests & build jar
           run: java -jar flix.jar test    
