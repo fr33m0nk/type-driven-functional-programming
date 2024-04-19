@@ -7,7 +7,7 @@ use Semigroup.Semigroup
 /// e.g concat(Int32, Int32) -> Int32
 /// 
 @Test
-def isAdditionMagma() : Bool =
+def isNumSubstractionMagma() : Bool =
     Magma.concat(30, 20) == 10
 
 ///
@@ -17,5 +17,5 @@ def isAdditionMagma() : Bool =
 /// e.g concat(Int32, Int32) -> Int32
 /// 
 @Test
-def isAdditionSemigroup() : Bool =
+def isNumAdditionSemigroup() : Bool =
     Semigroup.concat(10, Semigroup.concat(30, 20)) == Semigroup.concat(20, Semigroup.concat(30, 10)) and Semigroup.concat(30, Semigroup.concat(20, 10)) == 60
