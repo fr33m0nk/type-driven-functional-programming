@@ -10,12 +10,21 @@ mod Magma {
 
     instance Magma[Int32] {
         pub def concat(x: Int32, y: Int32): Int32 =
-            x + y
+            x - y
     }
 }
 
 mod Semigroup {
+    trait Semigroup[a] {
+        pub def concat(x: a, y: a): a
+    
+    law associative: forall(x: a, y: a, z: a) with Eq[a] . Semigroup.concat(Semigroup.concat(x, y), z) == Semigroup.concat(x, Semigroup.concat(y, z))
+    }
 
+    instance Semigroup[Int32] {
+        pub def concat(x: Int32, y: Int32): Int32 =
+            x + y
+    }
 }
 
 mod Monoid {
